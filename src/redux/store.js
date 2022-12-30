@@ -12,6 +12,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
+import { authSliceReduser } from './auth/slice';
 
 
 // const persistConfig = {
@@ -23,6 +24,7 @@ import {
 
 export const store = configureStore({
     reducer:{
+        auth: authSliceReduser,
         contacts: phoneBookReduser ,
         filter: filterContactsSlice,
     },

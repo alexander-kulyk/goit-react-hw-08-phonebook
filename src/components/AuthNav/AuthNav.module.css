@@ -1,0 +1,12 @@
+.authNavList{
+    display: flex;
+    margin: 0;
+}
+
+.authNavItem{
+    margin-left: 10px;
+    list-style: none
+}
+.authNavLink{
+    text-decoration:  none;
+}
