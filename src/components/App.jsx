@@ -11,6 +11,8 @@ import { LogInUser } from 'pages/LogInUser';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshUser } from 'redux/auth/operations';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 
 export const App = () =>{
@@ -28,9 +30,9 @@ useEffect(() => {
           <Routes>
             <Route path='/' element={<Layout/>}>
               <Route index element={<Home/>}></Route>
-              <Route path='contacts' element={<PhoneBook/>}/>
-              <Route path='login' element={<LogInUser/>}/>
-              <Route path='registration' element={<RegisterUser/>}/>
+              <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} component={<PhoneBook/>}/>}/>
+              <Route path='login' element={<RestrictedRoute ridirectTo={'/contacts'} component={<LogInUser/>}/>}/>
+              <Route path='registration' element={<RestrictedRoute ridirectTo={'/contacts'} component={<RegisterUser/>}/>}/>
             </Route>
           </Routes>
         </>
