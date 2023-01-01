@@ -67,7 +67,7 @@ export const refreshUser = createAsyncThunk(
     async (_,thunkAPI) => {
         const state = thunkAPI.getState()
         const token = state.auth.token
-        
+
         console.log('state', state)
         console.log('token', token)
         
@@ -90,6 +90,18 @@ export const refreshUser = createAsyncThunk(
       
     }
     
-)
+);
+
+
+
+
+// export const getUsers = async () => {
+
+//    const resp = await axios.get('/users');
+//    console.log('resp', resp)
+//    return resp
+  
+// }
+
 
 

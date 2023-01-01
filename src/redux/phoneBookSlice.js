@@ -45,7 +45,6 @@ const phoneBookSlice = createSlice({
         [addContact.pending]: handelePending,
         [addContact.fulfilled](state, action){
             
-            console.log('action.payload', action.payload)
             state.isLoading = false;
             //state.items.push(action.payload)
             state.items = [action.payload, ...state.items]
@@ -56,7 +55,6 @@ const phoneBookSlice = createSlice({
         // -------------deleteContact----------------
         [deleteContact.pending]:handelePending,
         [deleteContact.fulfilled](state, action) {
-            console.log('action', action.payload)
             state.isLoading = false;
             state.items = state.items.filter(item => item.id !== action.payload.id);
         },

@@ -14,7 +14,7 @@ export const ContactForm = () =>{
     const dispatch  = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('')
+    const [number, setNumber] = useState('')
 
     
 
@@ -23,17 +23,17 @@ export const ContactForm = () =>{
         
         //const form = e.target;
         const name = e.currentTarget.elements.name.value;
-        const phone = e.currentTarget.elements.number.value;
+        const number = e.currentTarget.elements.number.value;
 
         const checkContact = contacts.find(item =>item.name === name);
 
         if (checkContact !== undefined) {
             toast.error(`${name} is already in contacts.`)
         }else{
-            dispatch(addContact({ name, phone })); 
+            dispatch(addContact({ name, number })); 
             //form.reset();
             setName('');
-            setPhone('');
+            setNumber('');
         }
     };
     
@@ -43,7 +43,7 @@ export const ContactForm = () =>{
         
     }
     const handleClickCrossPhone = e =>{
-        setPhone('');
+        setNumber('');
          
      }
 
@@ -79,10 +79,10 @@ export const ContactForm = () =>{
                                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                                 required
-                                value={phone}
+                                value={number}
                                 id={idInputNamber}
 
-                                onChange={e => setPhone(e.target.value)}
+                                onChange={e => setNumber(e.target.value)}
                                 />
                             <CrossIcon onClick={handleClickCrossPhone}/>
                         </div>

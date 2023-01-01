@@ -11,8 +11,8 @@ export const fetchContacts = createAsyncThunk(
 
         try {
             const resp = await axios.get('/contacts');
-            const data = resp.data
-            
+            const data = resp.data;
+
             const sortByName = data.sort((a,b)=>a.name.localeCompare(b.name))
             return sortByName
 
@@ -26,6 +26,7 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
     "contacts/addContact",
     async(contact, thunkAPI) =>{
+        console.log('contact', contact)
 
         try {
             const resp = await axios.post('/contacts',contact);
@@ -43,7 +44,7 @@ export const deleteContact = createAsyncThunk(
     async (contactId, thunkAPI)=>{
         
         try {
-            const resp = await axios.delete(`contacts/${contactId}`);
+            const resp = await axios.delete(`/contacts/${contactId}`);
             return resp.data
         } catch (e) {
             console.log(e.message)
