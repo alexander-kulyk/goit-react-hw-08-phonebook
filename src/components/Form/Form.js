@@ -2,9 +2,9 @@ import { nanoid } from 'nanoid';
 import { Button, CrossIcon, FormContact, Input, Label } from "./Form.styled";
 import { useDispatch, useSelector } from 'react-redux';
 //import { addNewCotact } from 'redux/phoneBookSlice';
-import { addContact } from 'redux/opirations';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { addContact } from 'redux/contacts/opirations';
 
 
 const idInputName = nanoid();

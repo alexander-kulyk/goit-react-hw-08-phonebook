@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {  persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import filterContactsSlice from './filterContactsSlice'
-import  { phoneBookReduser } from './phoneBookSlice';
+import  { phoneBookReduser } from './contacts/phoneBookSlice';
 import { authSliceReduser } from './auth/slice';
-
+import filterContactsSlice from './contacts/filterContactsSlice';
 import {
     FLUSH,
     REHYDRATE,
@@ -13,6 +12,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
+
 
 
 

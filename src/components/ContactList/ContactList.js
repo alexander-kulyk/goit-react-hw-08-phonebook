@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
-import { handleFindContact } from "redux/filterContactsSlice";
-import { deleteContact } from "redux/opirations";
+import { handleFindContact } from "redux/contacts/filterContactsSlice";
+import { deleteContact } from "redux/contacts/opirations";
+
+
 
 import { ContactList, ItemsContact,DeleteBtn, Notification } from "./ContactList.styled"
 

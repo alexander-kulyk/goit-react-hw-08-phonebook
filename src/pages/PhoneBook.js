@@ -7,8 +7,8 @@ import SkeletLoader from "components/SkeletonLoader/SkeletonLoader"
 import { PrimaryTitle, SecondaryTitle } from "components/Titles/Titles"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { ToastContainer } from "react-toastify"
-import { fetchContacts } from "redux/opirations"
+import { ToastContainer } from "react-toastify";
+import { fetchContacts } from "redux/contacts/opirations"
 import { ThemeProvider } from "styled-components"
 import { theme } from "theme/theme"
 
