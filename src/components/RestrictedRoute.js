@@ -4,8 +4,10 @@ import { Navigate } from "react-router-dom"
 
 
 
-export const RestrictedRoute = ({component: Component , ridirectTo ='/'}) => {
+export const RestrictedRoute = ({component , ridirectTo ='/'}) => {
    const isLoggedIn  = useSelector(state => state.auth.isLoggedIn)
   
-   return isLoggedIn ?  <Navigate to={ridirectTo}/> : Component;
+   return isLoggedIn ?  <Navigate to={ridirectTo}/> : component;
 }
+
+
