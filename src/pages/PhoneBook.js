@@ -14,7 +14,7 @@ import { theme } from "theme/theme"
 
 
 export const PhoneBook = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {error, isLoading} = useSelector(state => state.contacts)
 
   useEffect(() => {

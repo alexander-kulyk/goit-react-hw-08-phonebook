@@ -1,6 +1,7 @@
 import { AuthNav } from "components/AuthNav/AuthNav"
 import { UserMenu } from "components/userMenu/userMenu"
-import { useSelector } from "react-redux"
+import { useAuth } from "hooks/useAuth";
+//import { useSelector } from "react-redux"
 import { Link, Outlet } from "react-router-dom"
 import css from './Layout.module.css';
 
@@ -8,8 +9,8 @@ import css from './Layout.module.css';
 
 export const Layout = () => {
 
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-    console.log(isLoggedIn)
+    //const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    const { isLoggedIn } = useAuth();
    return(
         <>
             <header  className={css.header}>
