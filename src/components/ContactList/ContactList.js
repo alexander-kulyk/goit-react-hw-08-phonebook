@@ -38,9 +38,9 @@ export const Contact = () =>{
                 ? <Notification>You have no contacts</Notification>
                 : visibleContact.length === 0
                     ? <Notification>contact not found</Notification>
-                    : visibleContact.map(({id, name, phone}) =>(
+                    : visibleContact.map(({id, name, number}) =>(
                         <ItemsContact 
-                        key={id}>{name}: {phone} <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}>delete</DeleteBtn>
+                        key={id}>{name}: {number} <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}>delete</DeleteBtn>
                         </ItemsContact>
              
                     ))
