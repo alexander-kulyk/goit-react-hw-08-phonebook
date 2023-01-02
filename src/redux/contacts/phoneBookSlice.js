@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //import { nanoid } from 'nanoid';
 //import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addContact, deleteContact, fetchContacts } from "./opirations";
+import { addContact, deleteContact, fetchContacts, updateContact } from "./opirations";
 
 const handelePending = state =>{
     state.isLoading =true;
@@ -59,6 +59,24 @@ const phoneBookSlice = createSlice({
             state.items = state.items.filter(item => item.id !== action.payload.id);
         },
         [deleteContact.rejected]:handleRejected,
+
+        [updateContact.pending]: handelePending,
+        [updateContact.fulfilled](state, action){
+            console.log('action', action.payload)
+            state.isLoading = false;
+            state.items = state.items.map(item => {
+                
+                if (item.id === action.payload.id ) {
+
+                    return { 
+                        id: action.payload.id,
+                        name: action.payload.name,
+                        number: action.payload.number,
+                    }
+                }
+                return item
+            } )
+        }
     }
 
 });
@@ -70,7 +88,19 @@ export const phoneBookReduser = phoneBookSlice.reducer
 
 
 
+// if (item.id === action.payload.id) {
 
+                //     item.name = action.payload.name;
+                //     item.number = action.payload.number;
+
+                //     return{
+                //         id: action.payload.id,
+                //         name: item.name,
+                //         number: item.number
+                //     }
+                // }
+
+                // return state.items
 
 
 // reducers:{

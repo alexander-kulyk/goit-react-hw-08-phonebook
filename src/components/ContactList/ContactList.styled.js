@@ -30,9 +30,28 @@ export const DeleteBtn = styled.button`
     &:hover{
         transform: scale(1.1);
         background-color: ${p=>p.theme.colors.delBtn};
+        cursor: pointer;
     }
 `;
 
+
+export const EditBtn = styled.button`
+
+    color: ${p=>p.theme.colors.secondText};
+    background-color: ${p=>p.theme.colors.bcBtn};
+    margin-left: 15px;
+
+    border: ${p=>p.theme.borders.border};
+    border-radius: ${p=>p.theme.space[1]}px;
+
+    height:25px;
+
+    &:hover{
+        transform: scale(1.1);
+        background-color: ${p=>p.theme.colors.delBtn};
+        cursor: pointer;
+    }
+`;
 export const Notification = styled.p`
     padding: 0;
     margin:0;
