@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { updateContact } from "redux/contacts/opirations";
 
@@ -8,7 +8,7 @@ import { FaUserAstronaut } from 'react-icons/fa'
 
 
 
-export const EditModal = ({contactId}) => {
+export const EditModal = ({contactId, setIsOpentModal}) => {
 
     const contacts = useSelector(state =>state.contacts.items);
     const findContact = contacts.find(contact => contact.id === contactId);
@@ -16,9 +16,27 @@ export const EditModal = ({contactId}) => {
     const {name, number} =findContact;
 
     const [editName, setEditName] = useState(name);
-    const [editNumber, setEditNumber] = useState(number)
+    const [editNumber, setEditNumber] = useState(number);
     
-    const  dispatch  = useDispatch()
+    const  dispatch  = useDispatch();
+
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handeleKeyDown = e =>{
+      if (e.code === 'Escape') {
+        setIsOpentModal(false) 
+      }
+  };
+  
+    useEffect(() => {
+      window.addEventListener('keydown', handeleKeyDown);
+    
+      return () => {
+        window.removeEventListener('keydown',  handeleKeyDown );
+      }
+    // eslint-disable-next-line no-use-before-define
+    }, [handeleKeyDown])
+    
 
     
     
@@ -30,15 +48,18 @@ export const EditModal = ({contactId}) => {
 
         const editedContact = {contactId,name, number}
 
-        dispatch(updateContact(editedContact))
+        dispatch(updateContact(editedContact));
+        setIsOpentModal(false)
     };
 
     const onClickOverlay = e =>{
 
       if (e.target === e.currentTarget) {
-          
+        setIsOpentModal(false)  
       }
-    }
+    };
+
+    
     
       
     

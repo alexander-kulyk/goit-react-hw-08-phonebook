@@ -14,7 +14,7 @@ import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn } from "./Co
 
 export const Contact = () =>{
 
-    const [editModal, setEditModal] = useState(false);
+    const [isOpentModal, setIsOpentModal] = useState(false);
     const [contactId, setContactId] = useState('');
 
 
@@ -39,7 +39,7 @@ export const Contact = () =>{
 
     const handleEditContact = id => {
         setContactId(id)
-        setEditModal(true);
+        setIsOpentModal(true);
     }
     
     
@@ -63,7 +63,7 @@ export const Contact = () =>{
                         </ItemsContact>
                     ))
             }
-            {editModal && <EditModal contactId={contactId}/>}
+            {isOpentModal && <EditModal setIsOpentModal ={setIsOpentModal} contactId={contactId}/>}
         </ContactList>
     )
 }
