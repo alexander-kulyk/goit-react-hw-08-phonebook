@@ -1,7 +1,8 @@
 //import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { registerUser } from "redux/auth/operations";
-
+import { useAuth } from "hooks/useAuth";
+import { ErrorMessage } from "components/Error/ErrorMessage";
 import css from '../components/Form/form.module.css'
 
 
@@ -11,6 +12,7 @@ export const RegisterUser = () => {
     // const [password, setPassword] = useState('')
     // const [mail, setMail] = useState('')
     const dispatch = useDispatch();
+    const { error } = useAuth();
 
     // const handleChangeInput = e => {
       
@@ -59,6 +61,9 @@ export const RegisterUser = () => {
             <button
                 className={css.buttonForm}
                 type="submit">Create</button>
+
+                <br/>
+                {error &&  <ErrorMessage/>}
         </form>
     </>
   )

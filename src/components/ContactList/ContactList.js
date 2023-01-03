@@ -3,16 +3,18 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { handleFindContact } from "redux/contacts/filterContactsSlice";
 import { deleteContact } from "redux/contacts/opirations";
+import { toast } from 'react-toastify';
 
 import { AiFillEdit } from 'react-icons/ai'
 import { FiDelete } from 'react-icons/fi'
+import { GrFavorite } from 'react-icons/gr'
 
 
 
-import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn } from "./ContactList.styled"
+import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
 
 
-export const Contact = () =>{
+export const Contact = ({setFavId}) =>{
 
     const [isOpentModal, setIsOpentModal] = useState(false);
     const [contactId, setContactId] = useState('');
@@ -41,6 +43,13 @@ export const Contact = () =>{
         setContactId(id)
         setIsOpentModal(true);
     }
+
+    const handleAddFavorite = id => {
+        toast('added contact to favorite')
+        setFavId(id)
+      
+    }
+    
     
     
     
@@ -53,12 +62,12 @@ export const Contact = () =>{
                 : visibleContact.length === 0
                     ? <Notification>contact not found</Notification>
                     : visibleContact.map(({id, name, number}) =>(
-                        <ItemsContact 
-                        onClick={()=>handleEditContact(id)}
-                        key={id}>{name}: {number}
+                        <ItemsContact key={id}>
+                            {name}: {number}
                             <div style={{marginLeft: '15px'}}>
                                 <EditBtn type="button" onClick={()=>handleEditContact(id)}><AiFillEdit/></EditBtn> 
                                 <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><FiDelete/></DeleteBtn>
+                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}><GrFavorite/></FavBtn>
                             </div>
                         </ItemsContact>
                     ))
@@ -68,3 +77,4 @@ export const Contact = () =>{
     )
 }
 
+//onClick={()=>handleEditContact(id)}

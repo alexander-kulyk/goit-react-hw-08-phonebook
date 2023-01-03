@@ -54,6 +54,23 @@ export const EditBtn = styled.button`
         cursor: pointer;
     }
 `;
+
+export const FavBtn = styled.button`
+
+    background-color: transparent;
+
+    border: none;
+    border-radius: ${p=>p.theme.space[1]}px;
+
+    height:25px;
+
+    &:hover{
+        transform: scale(1.3);
+        cursor: pointer;
+    }
+`;
+
+
 export const Notification = styled.p`
     padding: 0;
     margin:0;

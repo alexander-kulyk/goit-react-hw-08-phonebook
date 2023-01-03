@@ -15,7 +15,17 @@ export const Layout = () => {
             <header  className={css.header}>
                 <div className={css.containerPages}>
                     <LinkPages  className={css.linkPages} to='/'>Home</LinkPages>
-                    {isLoggedIn && <LinkPages className={css.linkPages} to='contacts'>Phonebook</LinkPages>}
+                    {isLoggedIn && (
+                        <>
+                            <LinkPages 
+                                className={css.linkPages} 
+                                to='contacts'>
+                                    Phonebook 
+                            </LinkPages>
+                            <LinkPages className={css.linkPages} to='favorite'>Favorite </LinkPages>
+                        </> )
+                    }
+                    
                 </div>
                 <nav>
                     {isLoggedIn 

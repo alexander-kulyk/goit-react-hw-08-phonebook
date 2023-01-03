@@ -1,8 +1,13 @@
 import { useDispatch } from "react-redux";
 import { loginUser } from "redux/auth/operations";
+import { useAuth } from "hooks/useAuth";
+import { ErrorMessage } from "components/Error/ErrorMessage";
 import css from '../components/Form/form.module.css'
 
 export const LogInUser = () => {
+
+    const { error } = useAuth();
+   
     const dispatch  = useDispatch()
 
     const handleSubmit = e => {
@@ -11,7 +16,6 @@ export const LogInUser = () => {
         const password = e.currentTarget.elements[1].value;
 
         const userDetails = {email, password};
-        console.log(userDetails)
 
         dispatch(loginUser(userDetails))
 
@@ -40,6 +44,9 @@ export const LogInUser = () => {
             <button 
                 className={css.buttonForm}
                 type="submit">Login</button>
+                
+                <br/>
+                {error &&  <ErrorMessage/>}
         </form>
     </>
   )
