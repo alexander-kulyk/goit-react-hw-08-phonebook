@@ -1,10 +1,10 @@
-
+import css from './Home.module.css'
 
 
 
 
 export const Home = () => {
   return(
-    <div><h1>Welcome your phonebook</h1></div>
+<h1 className={css.titleHome}>Welcome in your phonebook</h1>
   )
 }

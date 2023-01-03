@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux";
 import { registerUser } from "redux/auth/operations";
 
+import css from '../components/Form/form.module.css'
 
 
 export const RegisterUser = () => {
@@ -28,29 +29,37 @@ export const RegisterUser = () => {
     }
     
   return (
-    <form onSubmit={handleSubmit}>
-        <label>
-            Username
-            <input
-                type='text'
-                name='name'
-            />
-        </label>
-        <label>
-            Email
-            <input
-                type='email'
-                name='email'
-            />
-        </label>
-        <label>
-            Password
-            <input
-                type='password'
-                name='password'
-            />
-        </label>
-        <button type="submit">Register</button>
-    </form>
+    <>
+        <h2 className={css.titleForm}>Create Your account</h2>
+        <form className={css.form} onSubmit={handleSubmit}>
+            <label>
+                <input
+                    className={css.input}
+                    type='text'
+                    name='name'
+                    placeholder="Name"
+                />
+            </label>
+            <label>
+                <input
+                    className={css.input}
+                    type='email'
+                    name='email'
+                    placeholder="Email"
+                />
+            </label>
+            <label>
+                <input
+                    className={css.input}
+                    type='password'
+                    name='password'
+                    placeholder="Password"
+                />
+            </label>
+            <button
+                className={css.buttonForm}
+                type="submit">Create</button>
+        </form>
+    </>
   )
 }
