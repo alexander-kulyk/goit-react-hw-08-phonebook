@@ -11,25 +11,29 @@ export const ItemsContact = styled.li`
     justify-content: space-between;
     align-items: center;
 
-  margin-bottom: ${p=>p.theme.space[2]}px;
-  font-family: ${p=>p.theme.fonts.monospace};
+    font-family: ${p=>p.theme.fonts.monospace};
+    padding: 5px;
+
+  :hover{
+    cursor: pointer;
+    background-color: #ededf0;
+
+    border-radius: 5px;
+  }
 
 `;
 
 export const DeleteBtn = styled.button`
 
-    color: ${p=>p.theme.colors.secondText};
-    background-color: ${p=>p.theme.colors.bcBtn};
-    margin-left: 15px;
-
-    border: ${p=>p.theme.borders.border};
-    border-radius: ${p=>p.theme.space[1]}px;
+    
+    background-color: transparent;
+    border: none;
 
     height:25px;
 
     &:hover{
-        transform: scale(1.1);
-        background-color: ${p=>p.theme.colors.delBtn};
+        transform: scale(1.3);
+        color: red;
         cursor: pointer;
     }
 `;
@@ -37,18 +41,16 @@ export const DeleteBtn = styled.button`
 
 export const EditBtn = styled.button`
 
-    color: ${p=>p.theme.colors.secondText};
-    background-color: ${p=>p.theme.colors.bcBtn};
+    background-color: transparent;
     margin-left: 15px;
 
-    border: ${p=>p.theme.borders.border};
+    border: none;
     border-radius: ${p=>p.theme.space[1]}px;
 
     height:25px;
 
     &:hover{
-        transform: scale(1.1);
-        background-color: ${p=>p.theme.colors.delBtn};
+        transform: scale(1.3);
         cursor: pointer;
     }
 `;

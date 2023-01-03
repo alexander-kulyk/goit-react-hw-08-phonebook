@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { handleFindContact } from "redux/contacts/filterContactsSlice";
 import { deleteContact } from "redux/contacts/opirations";
 
+import { AiFillEdit } from 'react-icons/ai'
+import { FiDelete } from 'react-icons/fi'
+
 
 
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn } from "./ContactList.styled"
@@ -51,9 +54,12 @@ export const Contact = () =>{
                     ? <Notification>contact not found</Notification>
                     : visibleContact.map(({id, name, number}) =>(
                         <ItemsContact 
+                        onClick={()=>handleEditContact(id)}
                         key={id}>{name}: {number}
-                            <EditBtn type="button" onClick={()=>handleEditContact(id)}>edit</EditBtn> 
-                            <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}>delete</DeleteBtn>
+                            <div style={{marginLeft: '15px'}}>
+                                <EditBtn type="button" onClick={()=>handleEditContact(id)}><AiFillEdit/></EditBtn> 
+                                <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><FiDelete/></DeleteBtn>
+                            </div>
                         </ItemsContact>
                     ))
             }

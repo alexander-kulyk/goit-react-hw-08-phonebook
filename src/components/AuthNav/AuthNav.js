@@ -1,5 +1,4 @@
-import { LinkPages } from "components/Layout/Layout.styled"
-import { Link } from "react-router-dom"
+import { LinkPages } from "components/Layout/Layout.styled";
 import css from  './AuthNav.module.css'
 
 
