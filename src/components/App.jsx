@@ -39,7 +39,7 @@ useEffect(() => {
                   <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}></Route>
                     <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} component={<PhoneBook setFavId={setFavId} />}/>}/>
-                    <Route path='favorite' element={<FavoriteContacts favId={favId}/>}/>
+                    <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} component={<FavoriteContacts favId={favId}/>}/>}/>
                     <Route path='login' element={<RestrictedRoute ridirectTo={'/contacts'} component={<LogInUser/>}/>}/>
                     <Route path='registration' element={<RestrictedRoute ridirectTo={'/contacts'} component={<RegisterUser/>}/>}/>
                   </Route>
