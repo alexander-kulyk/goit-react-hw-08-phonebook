@@ -1,7 +1,8 @@
 import { useAuth } from "hooks/useAuth";
 import { useDispatch } from "react-redux"
-import { Link } from "react-router-dom";
 import { logOutUser } from "redux/auth/operations";
+
+import css from './userMenu.module.css'
 
 
 export const UserMenu = () => {
@@ -17,10 +18,9 @@ export const UserMenu = () => {
     
 
   return (
-    <div style={{display: 'flex'}}>
-      <Link to='contacts'>Phonebook</Link>
-        <p style={{margin: '0 0 0 20px'}}>{user.name}</p>
-        <button onClick={handleClickLogOut}>logout</button>
+    <div className={css.containerUserMenu}>
+        <p className={css.userName}>{user.name}</p>
+        <button className={css.logoutBtn} onClick={handleClickLogOut}>logout</button>
     </div>
   )
 }

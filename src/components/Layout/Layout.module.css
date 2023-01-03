@@ -1,3 +1,17 @@
 .header{
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+
+    background-color: rgba(0,0,0,0.8);;
+}
+
+
+.containerPages{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 180px;
 }

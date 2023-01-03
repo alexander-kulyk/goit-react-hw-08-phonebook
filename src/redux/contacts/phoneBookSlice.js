@@ -60,12 +60,14 @@ const phoneBookSlice = createSlice({
         },
         [deleteContact.rejected]:handleRejected,
 
+
+        // ------------- updateContact --------------
         [updateContact.pending]: handelePending,
         [updateContact.fulfilled](state, action){
-            console.log('action', action.payload)
+            
             state.isLoading = false;
             state.items = state.items.map(item => {
-                
+
                 if (item.id === action.payload.id ) {
 
                     return { 
@@ -76,7 +78,8 @@ const phoneBookSlice = createSlice({
                 }
                 return item
             } )
-        }
+        },
+        [updateContact.rejected]:handleRejected,
     }
 
 });

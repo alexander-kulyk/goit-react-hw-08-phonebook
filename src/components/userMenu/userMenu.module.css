@@ -1,0 +1,26 @@
+
+.userName{
+    margin-right: 20px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #c7bcbc;
+}
+
+.logoutBtn{
+
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 4px;
+    height: 25px;
+
+    cursor: pointer;
+}
+.logoutBtn:hover{
+    transform: scale(1.1);
+}
+
+.containerUserMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
