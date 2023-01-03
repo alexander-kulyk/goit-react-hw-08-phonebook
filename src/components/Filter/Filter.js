@@ -5,17 +5,17 @@ import { FilterIntput, FilterTitle } from "./Filter.styled"
 
 
 
-export const Filter = ({title}) =>{
+export const Filter = () =>{
     
     const dispatch = useDispatch();
     const query = useSelector(state => state.filter.filter);
 
     return(
         <>
-            <FilterTitle>{title}</FilterTitle>
             <FilterIntput
                 type="text"
                 name="filter"
+                placeholder="Find contacs by name"
                 value={query}
                 onChange = {e => dispatch(handleFindContact(e.target.value))}
             />

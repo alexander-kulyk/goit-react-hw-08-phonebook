@@ -47,7 +47,7 @@ export const PhoneBook = () => {
           alignItems='center'
         >
           <SecondaryTitle>Contact</SecondaryTitle>
-          <Filter title="Find contacs by name"/>
+          <Filter/>
           {error !==null && <ErrorMessage/>}
           {isLoading 
               ? <SkeletLoader/>
