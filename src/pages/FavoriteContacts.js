@@ -1,22 +1,26 @@
-import { useState } from "react";
-import { useSelector } from "react-redux"
+//import { ContactList, FavBtn, ItemsContact, Notification } from "components/ContactList/ContactList.styled"
+import { toast } from 'react-toastify';
 
-
-export const FavoriteContacts = ({favId}) => {
-    const contacs  = useSelector(state => state.contacts.items)
-    const [favContacts, setFavContacts] = useState([])
-
-    const favoriteContact = contacs.find(contact => contact.id === favId);
-    console.log('favoriteContacts', favoriteContact);
-    console.log('setFavContacts', setFavContacts)
-
+export const FavoriteContacts = ({favContacts, setFavContacts}) => {
     
-    
-    
-    
-console.log('favContacts', favContacts)
+const handleRemoveFav = id => {
+  toast('remove from favorite')
+  const newState = favContacts.filter(contact =>contact.id !== id)
+  setFavContacts(newState)
+  
+};
     
   return (
-    <div>{favId}</div>
+    <ul>
+      {favContacts.length === 0
+          ? <p>You have no favorite contacts</p>
+          : favContacts.map(({id, name, number})=>(
+            <li key={id}>
+              {name}: {number} 
+              <button onClick={() => handleRemoveFav(id)}>remove</button>
+            </li>
+          ))
+      }
+    </ul>
   )
 }

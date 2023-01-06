@@ -22,7 +22,7 @@ export const App = () =>{
 
 const dispatch =  useDispatch();
 const isRefreshing = useSelector(state => state.auth.isRefreshing);
-const [favId, setFavId] = useState('')
+const [favContacts, setFavContacts] = useState([])
 
 
 useEffect(() => {
@@ -38,8 +38,8 @@ useEffect(() => {
                 <Routes>
                   <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}></Route>
-                    <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} component={<PhoneBook setFavId={setFavId} />}/>}/>
-                    <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} component={<FavoriteContacts favId={favId}/>}/>}/>
+                    <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} component={<PhoneBook favContacts={favContacts} setFavContacts={setFavContacts} />}/>}/>
+                    <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} component={<FavoriteContacts favContacts={favContacts} setFavContacts={setFavContacts}/>}/>}/>
                     <Route path='login' element={<RestrictedRoute ridirectTo={'/contacts'} component={<LogInUser/>}/>}/>
                     <Route path='registration' element={<RestrictedRoute ridirectTo={'/contacts'} component={<RegisterUser/>}/>}/>
                   </Route>

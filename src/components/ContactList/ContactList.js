@@ -14,7 +14,7 @@ import { GrFavorite } from 'react-icons/gr'
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
 
 
-export const Contact = ({setFavId}) =>{
+export const Contact = ({setFavContacts, favContacts}) =>{
 
     const [isOpentModal, setIsOpentModal] = useState(false);
     const [contactId, setContactId] = useState('');
@@ -45,8 +45,18 @@ export const Contact = ({setFavId}) =>{
     }
 
     const handleAddFavorite = id => {
+        
+        const favContact = contacts.find(contact => contact.id  === id);
+        const checkFavContact =  favContacts.some(contact =>contact.id === favContact.id);
+
+        if (checkFavContact === true) {
+            toast.error('this contact is in your favorites')
+            return
+            
+        }
+        setFavContacts(pS => [favContact,...pS])
         toast('added contact to favorite')
-        setFavId(id)
+        
       
     }
     

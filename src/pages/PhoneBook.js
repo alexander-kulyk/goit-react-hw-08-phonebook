@@ -13,7 +13,7 @@ import { ThemeProvider } from "styled-components"
 import { theme } from "theme/theme"
 
 
-export const PhoneBook = ({setFavId}) => {
+export const PhoneBook = ({favContacts, setFavContacts}) => {
   const dispatch = useDispatch();
   const {error, isLoading} = useSelector(state => state.contacts)
 
@@ -51,7 +51,7 @@ export const PhoneBook = ({setFavId}) => {
           {error !==null && <ErrorMessage/>}
           {isLoading 
               ? <SkeletLoader/>
-              : <Contact setFavId={setFavId}/>
+              : <Contact setFavContacts={setFavContacts} favContacts={favContacts}/>
           }
             
         </Container>
