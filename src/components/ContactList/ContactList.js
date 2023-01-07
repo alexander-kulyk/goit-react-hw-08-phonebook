@@ -7,14 +7,14 @@ import { toast } from 'react-toastify';
 
 import { AiFillEdit } from 'react-icons/ai'
 import { FiDelete } from 'react-icons/fi'
-import { GrFavorite } from 'react-icons/gr'
+import { MdFavoriteBorder } from 'react-icons/md'
 
 
 
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
+//(favContacts ||  [])
 
-
-export const Contact = ({setFavContacts, favContacts}) =>{
+export const Contact = ({addFavorite, favContacts}) =>{
 
     const [isOpentModal, setIsOpentModal] = useState(false);
     const [contactId, setContactId] = useState('');
@@ -23,7 +23,7 @@ export const Contact = ({setFavContacts, favContacts}) =>{
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
     const query = useSelector(state => state.filter.filter);
-
+    
     
     const  getVisibleContact = () => {
         const normalizeFilter = query.toLocaleLowerCase()
@@ -42,27 +42,24 @@ export const Contact = ({setFavContacts, favContacts}) =>{
     const handleEditContact = id => {
         setContactId(id)
         setIsOpentModal(true);
-    }
+    };
+
 
     const handleAddFavorite = id => {
-        
+        console.log('favContacts', favContacts)
         const favContact = contacts.find(contact => contact.id  === id);
         const checkFavContact =  favContacts.some(contact =>contact.id === favContact.id);
+       
 
         if (checkFavContact === true) {
             toast.error('this contact is in your favorites')
-            return
-            
-        }
-        setFavContacts(pS => [favContact,...pS])
-        toast('added contact to favorite')
-        
-      
-    }
-    
-    
-    
-    
+            return  
+        };
+        addFavorite(favContact)
+        toast('added contact to favorite');
+    };
+   
+
     
     return(
         <ContactList>
@@ -77,7 +74,7 @@ export const Contact = ({setFavContacts, favContacts}) =>{
                             <div style={{marginLeft: '15px'}}>
                                 <EditBtn type="button" onClick={()=>handleEditContact(id)}><AiFillEdit/></EditBtn> 
                                 <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><FiDelete/></DeleteBtn>
-                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}><GrFavorite/></FavBtn>
+                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}><MdFavoriteBorder/></FavBtn>
                             </div>
                         </ItemsContact>
                     ))
@@ -85,6 +82,8 @@ export const Contact = ({setFavContacts, favContacts}) =>{
             {isOpentModal && <EditModal setIsOpentModal ={setIsOpentModal} contactId={contactId}/>}
         </ContactList>
     )
+    
 }
 
 //onClick={()=>handleEditContact(id)}
+//isFav ? <MdFavorite/> : <MdFavoriteBorder/>

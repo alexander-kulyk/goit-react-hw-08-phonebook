@@ -1,23 +1,23 @@
-//import { ContactList, FavBtn, ItemsContact, Notification } from "components/ContactList/ContactList.styled"
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
+import css from 'components/ContactList/ContactList.module.css'
+import { GrFavorite } from 'react-icons/gr'
 
-export const FavoriteContacts = ({favContacts, setFavContacts}) => {
+
+export const FavoriteContacts = ({favContacts, removeFav}) => {
     
-const handleRemoveFav = id => {
-  toast('remove from favorite')
-  const newState = favContacts.filter(contact =>contact.id !== id)
-  setFavContacts(newState)
-  
-};
+  const handleRemoveFav = id => {
+    removeFav(id)
+    
+  };
     
   return (
-    <ul>
+    <ul className={css.list}>
       {favContacts.length === 0
           ? <p>You have no favorite contacts</p>
           : favContacts.map(({id, name, number})=>(
-            <li key={id}>
+            <li className={css.item} key={id}>
               {name}: {number} 
-              <button onClick={() => handleRemoveFav(id)}>remove</button>
+              <button className={css.buttonFav} onClick={() => handleRemoveFav(id)}><GrFavorite/></button>
             </li>
           ))
       }
