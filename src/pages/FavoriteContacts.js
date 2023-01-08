@@ -1,14 +1,28 @@
 //import { toast } from 'react-toastify';
 import css from 'components/ContactList/ContactList.module.css'
-import { GrFavorite } from 'react-icons/gr'
+import { MdFavorite } from 'react-icons/md'
+import { AiFillEdit } from 'react-icons/ai'
+import { EditModal } from 'components/editModal/EditModal';
 
 
-export const FavoriteContacts = ({favContacts, removeFav}) => {
+export const FavoriteContacts = ({
+  favContacts,
+  setFavContacts, 
+  removeFav,
+  setContactId,
+  setIsOpentModal,
+  isOpentModal,
+  contactId
+}) => {
     
   const handleRemoveFav = id => {
     removeFav(id)
     
   };
+  const handleEditContact = id => {
+    setContactId(id)
+    setIsOpentModal(true);
+};
     
   return (
     <ul className={css.list}>
@@ -17,10 +31,17 @@ export const FavoriteContacts = ({favContacts, removeFav}) => {
           : favContacts.map(({id, name, number})=>(
             <li className={css.item} key={id}>
               {name}: {number} 
-              <button className={css.buttonFav} onClick={() => handleRemoveFav(id)}><GrFavorite/></button>
+              <button onClick={()=>handleEditContact(id)}><AiFillEdit/></button>
+              <button className={css.buttonFav} onClick={() => handleRemoveFav(id)}><MdFavorite/></button>
             </li>
           ))
       }
+       {isOpentModal && <EditModal 
+          setIsOpentModal ={setIsOpentModal} 
+          contactId={contactId}
+          favContacts={favContacts}
+          setFavContacts={setFavContacts}
+          />}
     </ul>
   )
 }

@@ -1,5 +1,5 @@
 import { EditModal } from "components/editModal/EditModal";
-import { useState } from "react";
+//import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { handleFindContact } from "redux/contacts/filterContactsSlice";
 import { deleteContact } from "redux/contacts/opirations";
@@ -14,10 +14,14 @@ import { MdFavoriteBorder } from 'react-icons/md'
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
 //(favContacts ||  [])
 
-export const Contact = ({addFavorite, favContacts}) =>{
-
-    const [isOpentModal, setIsOpentModal] = useState(false);
-    const [contactId, setContactId] = useState('');
+export const Contact = ({
+    addFavorite, 
+    favContacts,
+    setFavContacts,
+    setContactId, 
+    setIsOpentModal, 
+    isOpentModal, 
+    contactId}) =>{
 
 
     const dispatch = useDispatch();
@@ -33,6 +37,10 @@ export const Contact = ({addFavorite, favContacts}) =>{
     };
       
     const visibleContact = getVisibleContact();
+
+    // const getFavContacts = id => { 
+    //     return favContacts.filter(contact => contact.includes(id))
+    // }
     
     const handleDaleteContact = id =>{
         dispatch(deleteContact(id))
@@ -46,7 +54,6 @@ export const Contact = ({addFavorite, favContacts}) =>{
 
 
     const handleAddFavorite = id => {
-        console.log('favContacts', favContacts)
         const favContact = contacts.find(contact => contact.id  === id);
         const checkFavContact =  favContacts.some(contact =>contact.id === favContact.id);
        
@@ -58,6 +65,8 @@ export const Contact = ({addFavorite, favContacts}) =>{
         addFavorite(favContact)
         toast('added contact to favorite');
     };
+
+
    
 
     
@@ -79,7 +88,11 @@ export const Contact = ({addFavorite, favContacts}) =>{
                         </ItemsContact>
                     ))
             }
-            {isOpentModal && <EditModal setIsOpentModal ={setIsOpentModal} contactId={contactId}/>}
+            {isOpentModal && <EditModal 
+                                    setIsOpentModal ={setIsOpentModal} 
+                                    contactId={contactId}
+                                    setFavContacts={setFavContacts}
+                                    favContacts={favContacts}/>}
         </ContactList>
     )
     

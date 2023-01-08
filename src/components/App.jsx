@@ -25,6 +25,8 @@ export const App = () =>{
 
   const dispatch =  useDispatch();
   const [favContacts, setFavContacts] = useState([]);
+  const [isOpentModal, setIsOpentModal] = useState(false);
+    const [contactId, setContactId] = useState('');
   
 
   const addFavorite = fav => {
@@ -65,8 +67,24 @@ export const App = () =>{
                 <Routes>
                   <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}></Route>
-                    <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} component={<PhoneBook favContacts={favContacts} addFavorite={addFavorite} />}/>}/>
-                    <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} component={<FavoriteContacts favContacts={favContacts} removeFav={removeFav}/>}/>}/>
+                    <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} 
+                      component={<PhoneBook 
+                        favContacts={favContacts} 
+                        setFavContacts={setFavContacts}
+                        addFavorite={addFavorite} 
+                        setContactId={setContactId}
+                        setIsOpentModal={setIsOpentModal}
+                        isOpentModal={isOpentModal}
+                        contactId={contactId} />}/>}/>
+                    <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} 
+                      component={<FavoriteContacts 
+                        favContacts={favContacts}
+                        setFavContacts={setFavContacts}
+                        removeFav={removeFav}
+                        setContactId={setContactId}
+                        setIsOpentModal={setIsOpentModal}
+                        isOpentModal={isOpentModal}
+                        contactId={contactId}/>}/>}/>
                     <Route path='login' element={<RestrictedRoute ridirectTo={'/contacts'} component={<LogInUser/>}/>}/>
                     <Route path='registration' element={<RestrictedRoute ridirectTo={'/contacts'} component={<RegisterUser/>}/>}/>
                   </Route>

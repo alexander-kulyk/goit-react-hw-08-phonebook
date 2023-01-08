@@ -5,10 +5,18 @@ import { updateContact } from "redux/contacts/opirations";
 import css from '../editModal/EditModal.module.css'
 import formCss from '../Form/form.module.css'
 import { FaUserAstronaut } from 'react-icons/fa'
+import { useAuth } from "hooks/useAuth";
 
 
 
-export const EditModal = ({contactId, setIsOpentModal}) => {
+export const EditModal = ({
+    contactId, 
+    setIsOpentModal,
+    favContacts,
+    setFavContacts
+  }) => {
+    const { user } = useAuth();
+  const KEY = user.email;
 
     const contacts = useSelector(state =>state.contacts.items);
     const findContact = contacts.find(contact => contact.id === contactId);
@@ -49,7 +57,29 @@ export const EditModal = ({contactId, setIsOpentModal}) => {
         const editedContact = {contactId,name, number}
 
         dispatch(updateContact(editedContact));
-        setIsOpentModal(false)
+        editFav(editedContact)
+        setIsOpentModal(false);
+    };
+
+    const editFav = editedContact => { 
+
+      const {contactId, name, number} = editedContact;
+
+      const newFavs = favContacts.map(contact => {
+        if (contact.id === contactId) {
+          return{
+            id: contactId,
+            name,
+            number
+          }
+        }
+        return contact
+    
+      });
+
+      setFavContacts(newFavs);
+      window.localStorage.setItem(KEY, JSON.stringify(newFavs))
+
     };
 
     const onClickOverlay = e =>{
@@ -58,10 +88,6 @@ export const EditModal = ({contactId, setIsOpentModal}) => {
         setIsOpentModal(false)  
       }
     };
-
-    
-    
-      
     
     
   return (
