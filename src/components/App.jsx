@@ -72,6 +72,7 @@ export const App = () =>{
                         favContacts={favContacts} 
                         setFavContacts={setFavContacts}
                         addFavorite={addFavorite} 
+                        removeFav={removeFav}
                         setContactId={setContactId}
                         setIsOpentModal={setIsOpentModal}
                         isOpentModal={isOpentModal}

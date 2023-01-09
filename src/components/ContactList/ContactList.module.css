@@ -24,15 +24,38 @@
     border-radius: 5px;
 }
 
+.delBtn{
+    background-color: transparent;
+
+    border: none;
+    height:25px;
+}
+.delBtn:hover{
+    cursor: pointer;
+    color: red;
+    transform: scale(1.3);
+
+}
+
 .buttonFav{
     background-color: transparent;
 
     border: none;
-    border-radius: 5px;
-
     height:25px;
 }
 .buttonFav:hover{
+    transform: scale(1.3);
+        cursor: pointer;
+}
+
+.editBtn{
+    background-color: transparent;
+
+    border: none;
+    height:25px;
+};
+
+.editBtn:hover{
     transform: scale(1.3);
         cursor: pointer;
 }

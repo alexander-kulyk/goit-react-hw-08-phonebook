@@ -16,7 +16,8 @@ import { theme } from "theme/theme"
 export const PhoneBook = ({
     favContacts,
     setFavContacts,
-     addFavorite, 
+     addFavorite,
+     removeFav, 
      setContactId, 
      setIsOpentModal, 
      isOpentModal, 
@@ -66,6 +67,7 @@ export const PhoneBook = ({
                 setIsOpentModal={setIsOpentModal}
                 isOpentModal={isOpentModal}
                 contactId={contactId}
+                removeFav={removeFav}
                 />
           }
             

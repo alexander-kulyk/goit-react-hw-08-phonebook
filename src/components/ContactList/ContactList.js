@@ -6,16 +6,19 @@ import { deleteContact } from "redux/contacts/opirations";
 import { toast } from 'react-toastify';
 
 import { AiFillEdit } from 'react-icons/ai'
-import { FiDelete } from 'react-icons/fi'
-import { MdFavoriteBorder } from 'react-icons/md'
+import { AiTwotoneDelete } from 'react-icons/ai'
+import { MdFavoriteBorder } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md'
 
 
 
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
+import { useIsFave } from "hooks/useIsFave";
 //(favContacts ||  [])
 
 export const Contact = ({
-    addFavorite, 
+    addFavorite,
+    removeFav,
     favContacts,
     setFavContacts,
     setContactId, 
@@ -23,10 +26,13 @@ export const Contact = ({
     isOpentModal, 
     contactId}) =>{
 
-
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
     const query = useSelector(state => state.filter.filter);
+
+    const isFav = useIsFave(contactId, favContacts);
+    console.log('isFav', isFav);
+    
     
     
     const  getVisibleContact = () => {
@@ -44,7 +50,13 @@ export const Contact = ({
     
     const handleDaleteContact = id =>{
         dispatch(deleteContact(id))
-        dispatch(handleFindContact(''))  
+        dispatch(handleFindContact(''));
+
+        const checkFav = favContacts.some(contact => contact.id === id);
+
+        if (checkFav === true) {
+            removeFav(id)
+        }
     };
 
     const handleEditContact = id => {
@@ -64,10 +76,10 @@ export const Contact = ({
         };
         addFavorite(favContact)
         toast('added contact to favorite');
+        
     };
 
-
-   
+    
 
     
     return(
@@ -82,8 +94,8 @@ export const Contact = ({
                             {name}: {number}
                             <div style={{marginLeft: '15px'}}>
                                 <EditBtn type="button" onClick={()=>handleEditContact(id)}><AiFillEdit/></EditBtn> 
-                                <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><FiDelete/></DeleteBtn>
-                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}><MdFavoriteBorder/></FavBtn>
+                                <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><AiTwotoneDelete/></DeleteBtn>
+                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}>{isFav ? <MdFavorite/> : <MdFavoriteBorder/>}</FavBtn>
                             </div>
                         </ItemsContact>
                     ))

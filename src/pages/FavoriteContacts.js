@@ -1,8 +1,14 @@
-//import { toast } from 'react-toastify';
-import css from 'components/ContactList/ContactList.module.css'
+import { deleteContact } from "redux/contacts/opirations";
 import { MdFavorite } from 'react-icons/md'
 import { AiFillEdit } from 'react-icons/ai'
 import { EditModal } from 'components/editModal/EditModal';
+import { AiTwotoneDelete } from 'react-icons/ai'
+import { useDispatch } from 'react-redux';
+
+import css from 'components/ContactList/ContactList.module.css'
+
+
+
 
 
 export const FavoriteContacts = ({
@@ -14,6 +20,7 @@ export const FavoriteContacts = ({
   isOpentModal,
   contactId
 }) => {
+  const dispatch = useDispatch();
     
   const handleRemoveFav = id => {
     removeFav(id)
@@ -23,6 +30,11 @@ export const FavoriteContacts = ({
     setContactId(id)
     setIsOpentModal(true);
 };
+
+const handleDaleteContact = id =>{
+  dispatch(deleteContact(id));
+  handleRemoveFav(id);
+};
     
   return (
     <ul className={css.list}>
@@ -31,7 +43,8 @@ export const FavoriteContacts = ({
           : favContacts.map(({id, name, number})=>(
             <li className={css.item} key={id}>
               {name}: {number} 
-              <button onClick={()=>handleEditContact(id)}><AiFillEdit/></button>
+              <button className={css.editBtn} onClick={()=>handleEditContact(id)}><AiFillEdit/></button>
+              <button className={css.delBtn} onClick={()=>handleDaleteContact(id)} ><AiTwotoneDelete/></button>
               <button className={css.buttonFav} onClick={() => handleRemoveFav(id)}><MdFavorite/></button>
             </li>
           ))
