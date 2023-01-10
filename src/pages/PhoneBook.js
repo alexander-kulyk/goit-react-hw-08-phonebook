@@ -14,14 +14,9 @@ import { theme } from "theme/theme"
 
 
 export const PhoneBook = ({
-    favContacts,
-    setFavContacts,
      addFavorite,
      removeFav, 
-     setContactId, 
-     setIsOpentModal, 
-     isOpentModal, 
-     contactId}) => {
+    }) => {
   const dispatch = useDispatch();
   const {error, isLoading} = useSelector(state => state.contacts)
 
@@ -61,12 +56,6 @@ export const PhoneBook = ({
               ? <SkeletLoader/>
               : <Contact 
                 addFavorite={addFavorite} 
-                favContacts={favContacts}
-                setFavContacts={setFavContacts}
-                setContactId={setContactId}
-                setIsOpentModal={setIsOpentModal}
-                isOpentModal={isOpentModal}
-                contactId={contactId}
                 removeFav={removeFav}
                 />
           }
@@ -77,3 +66,9 @@ export const PhoneBook = ({
     </ThemeProvider>
   )
 }
+// favContacts={favContacts}
+//                 setFavContacts={setFavContacts}
+//                 setContactId={setContactId}
+//                 setIsOpentModal={setIsOpentModal}
+//                 isOpentModal={isOpentModal}
+//                 contactId={contactId}

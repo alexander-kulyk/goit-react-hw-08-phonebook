@@ -1,9 +1,13 @@
-import { deleteContact } from "redux/contacts/opirations";
-import { MdFavorite } from 'react-icons/md'
-import { AiFillEdit } from 'react-icons/ai'
-import { EditModal } from 'components/editModal/EditModal';
-import { AiTwotoneDelete } from 'react-icons/ai'
+import { useContext } from "react";
 import { useDispatch } from 'react-redux';
+
+import { deleteContact } from "redux/contacts/opirations";
+import { EditModal } from 'components/editModal/EditModal';
+import createContext from '.././context/context';
+
+import { MdFavorite } from 'react-icons/md';
+import { AiFillEdit } from 'react-icons/ai';
+import { AiTwotoneDelete } from 'react-icons/ai';
 
 import css from 'components/ContactList/ContactList.module.css'
 
@@ -11,16 +15,13 @@ import css from 'components/ContactList/ContactList.module.css'
 
 
 
-export const FavoriteContacts = ({
-  favContacts,
-  setFavContacts, 
-  removeFav,
-  setContactId,
-  setIsOpentModal,
-  isOpentModal,
-  contactId
-}) => {
+export const FavoriteContacts = ({removeFav}) => {
   const dispatch = useDispatch();
+  const {
+    favContacts, 
+    isOpentModal,
+    setIsOpentModal,
+    setContactId} = useContext(createContext)
     
   const handleRemoveFav = id => {
     removeFav(id)
@@ -49,12 +50,7 @@ const handleDaleteContact = id =>{
             </li>
           ))
       }
-       {isOpentModal && <EditModal 
-          setIsOpentModal ={setIsOpentModal} 
-          contactId={contactId}
-          favContacts={favContacts}
-          setFavContacts={setFavContacts}
-          />}
+       {isOpentModal && <EditModal />}
     </ul>
   )
 }

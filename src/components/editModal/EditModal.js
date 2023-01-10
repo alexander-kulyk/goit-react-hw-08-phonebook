@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { updateContact } from "redux/contacts/opirations";
+import createContext from '../../context/context';
 
 import css from '../editModal/EditModal.module.css'
 import formCss from '../Form/form.module.css'
@@ -9,13 +10,14 @@ import { useAuth } from "hooks/useAuth";
 
 
 
-export const EditModal = ({
-    contactId, 
+export const EditModal = () => {
+  const { user } = useAuth();
+  
+  const {favContacts, 
+    setFavContacts, 
     setIsOpentModal,
-    favContacts,
-    setFavContacts
-  }) => {
-    const { user } = useAuth();
+    contactId} = useContext(createContext);
+
   const KEY = user.email;
 
     const contacts = useSelector(state =>state.contacts.items);

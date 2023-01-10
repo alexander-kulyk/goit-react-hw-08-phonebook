@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { App } from 'components/App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { ProviderCtx } from 'context/Provider';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider  store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter basename='goit-react-hw-08-phonebook'>
-          <App />
+          <ProviderCtx>
+            <App />
+          </ProviderCtx>
         </BrowserRouter>
       </PersistGate>
     </Provider>

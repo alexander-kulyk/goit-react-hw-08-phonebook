@@ -8,25 +8,29 @@ import { PhoneBook } from 'pages/PhoneBook';
 import { RegisterUser } from 'pages/RegisterUser';
 import { LogInUser } from 'pages/LogInUser';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { refreshUser } from 'redux/auth/operations';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { FavoriteContacts } from 'pages/FavoriteContacts';
-import { useState } from 'react';
+//import { useState } from 'react';
 import { Loader } from './Loader/Loader';
 import { useAuth } from 'hooks/useAuth';
+import createContext from '../context/context'
 
 
 export const App = () =>{
+
+  const {setFavContacts, favContacts} = useContext(createContext);
+
 
   const { isRefreshing, user } = useAuth();
   const KEY = user.email;
 
   const dispatch =  useDispatch();
-  const [favContacts, setFavContacts] = useState([]);
-  const [isOpentModal, setIsOpentModal] = useState(false);
-    const [contactId, setContactId] = useState('');
+  // const [favContacts, setFavContacts] = useState([]);
+  // const [isOpentModal, setIsOpentModal] = useState(false);
+  // const [contactId, setContactId] = useState('');
   
 
   const addFavorite = fav => {
@@ -56,7 +60,7 @@ export const App = () =>{
 
     setFavContacts(favs ? JSON.parse(favs) : [])
     
-  }, [user]);
+  }, [setFavContacts, user]);
 
   
   
@@ -69,23 +73,11 @@ export const App = () =>{
                     <Route index element={<Home/>}></Route>
                     <Route path='contacts' element={<PrivateRoute redirectTo={'/login'} 
                       component={<PhoneBook 
-                        favContacts={favContacts} 
-                        setFavContacts={setFavContacts}
                         addFavorite={addFavorite} 
-                        removeFav={removeFav}
-                        setContactId={setContactId}
-                        setIsOpentModal={setIsOpentModal}
-                        isOpentModal={isOpentModal}
-                        contactId={contactId} />}/>}/>
+                        removeFav={removeFav}/>}/>}/>
                     <Route path='favorite' element={<PrivateRoute redirectTo={'/login'} 
                       component={<FavoriteContacts 
-                        favContacts={favContacts}
-                        setFavContacts={setFavContacts}
-                        removeFav={removeFav}
-                        setContactId={setContactId}
-                        setIsOpentModal={setIsOpentModal}
-                        isOpentModal={isOpentModal}
-                        contactId={contactId}/>}/>}/>
+                        removeFav={removeFav}/>}/>}/>
                     <Route path='login' element={<RestrictedRoute ridirectTo={'/contacts'} component={<LogInUser/>}/>}/>
                     <Route path='registration' element={<RestrictedRoute ridirectTo={'/contacts'} component={<RegisterUser/>}/>}/>
                   </Route>
@@ -93,4 +85,11 @@ export const App = () =>{
                 <GlobalStyle/>
               </>
                )
+
+              //  setContactId={setContactId}
+              //           setIsOpentModal={setIsOpentModal}
+              //           isOpentModal={isOpentModal}
+              //           contactId={contactId}
+              // favContacts={favContacts} 
+              //           setFavContacts={setFavContacts}
 }

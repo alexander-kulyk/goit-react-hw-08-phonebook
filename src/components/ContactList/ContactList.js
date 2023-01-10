@@ -10,21 +10,20 @@ import { AiTwotoneDelete } from 'react-icons/ai'
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFavorite } from 'react-icons/md'
 
-
-
 import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
 import { useIsFave } from "hooks/useIsFave";
+import { useContext } from "react";
+import createContext from '../../context/context'
 //(favContacts ||  [])
 
-export const Contact = ({
-    addFavorite,
-    removeFav,
-    favContacts,
-    setFavContacts,
-    setContactId, 
-    setIsOpentModal, 
-    isOpentModal, 
-    contactId}) =>{
+export const Contact = ({ addFavorite, removeFav}) =>{
+     const {
+        contactId, 
+        favContacts, 
+        setContactId, 
+        setIsOpentModal, 
+        isOpentModal
+    } = useContext(createContext)
 
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
@@ -100,11 +99,7 @@ export const Contact = ({
                         </ItemsContact>
                     ))
             }
-            {isOpentModal && <EditModal 
-                                    setIsOpentModal ={setIsOpentModal} 
-                                    contactId={contactId}
-                                    setFavContacts={setFavContacts}
-                                    favContacts={favContacts}/>}
+            {isOpentModal && <EditModal/>}
         </ContactList>
     )
     
