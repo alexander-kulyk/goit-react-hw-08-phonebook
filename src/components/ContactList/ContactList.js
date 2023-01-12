@@ -8,15 +8,13 @@ import { toast } from 'react-toastify';
 
 
 import { ContactList, Notification, } from "./ContactList.styled"
-import { useIsFave } from "hooks/useIsFave";
 import { useContext } from "react";
 import createContext from '../../context/context'
 import { ItemContact } from "./ItemContact";
 //(favContacts ||  [])
 
 export const Contact = ({ addFavorite, removeFav}) =>{
-     const {
-        contactId, 
+     const { 
         favContacts, 
         setContactId, 
         setIsOpentModal, 
