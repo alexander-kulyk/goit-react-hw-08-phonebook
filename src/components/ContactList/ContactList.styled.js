@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 
 export const ContactList = styled.ul`
@@ -7,75 +6,68 @@ export const ContactList = styled.ul`
 `;
 
 export const ItemsContact = styled.li`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    font-family: ${p=>p.theme.fonts.monospace};
-    padding: 5px;
+  font-family: ${p => p.theme.fonts.monospace};
+  padding: 5px;
 
-  :hover{
+  :hover {
     cursor: pointer;
     background-color: #ededf0;
 
     border-radius: 5px;
   }
-
 `;
 
 export const DeleteBtn = styled.button`
+  background-color: transparent;
+  border: none;
 
-    
-    background-color: transparent;
-    border: none;
+  height: 25px;
 
-    height:25px;
-
-    &:hover{
-        transform: scale(1.3);
-        color: red;
-        cursor: pointer;
-    }
+  &:hover {
+    transform: scale(1.3);
+    color: red;
+    cursor: pointer;
+  }
 `;
 
-
 export const EditBtn = styled.button`
+  background-color: transparent;
+  margin-left: 15px;
 
-    background-color: transparent;
-    margin-left: 15px;
+  border: none;
+  border-radius: ${p => p.theme.space[1]}px;
 
-    border: none;
-    border-radius: ${p=>p.theme.space[1]}px;
+  height: 25px;
 
-    height:25px;
-
-    &:hover{
-        transform: scale(1.3);
-        cursor: pointer;
-    }
+  &:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+  }
 `;
 
 export const FavBtn = styled.button`
+  background-color: transparent;
 
-    background-color: transparent;
+  border: none;
+  border-radius: ${p => p.theme.space[1]}px;
 
-    border: none;
-    border-radius: ${p=>p.theme.space[1]}px;
+  height: 25px;
 
-    height:25px;
-
-    &:hover{
-        transform: scale(1.3);
-        cursor: pointer;
-    }
+  &:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+  }
 `;
 
-
 export const Notification = styled.p`
-    padding: 0;
-    margin:0;
-    text-align: center;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 
-    color: ${p=>p.theme.colors.delBtn};
-    font-family: ${p=>p.theme.fonts.gillSans};
+  color: ${p => p.theme.colors.delBtn};
+  font-family: ${p => p.theme.fonts.gillSans};
 `;

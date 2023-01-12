@@ -1,88 +1,84 @@
-import { EditModal } from "components/editModal/EditModal";
-import { useDispatch, useSelector } from "react-redux"
-import { handleFindContact } from "redux/contacts/filterContactsSlice";
-import { deleteContact } from "redux/contacts/opirations";
+import { EditModal } from 'components/editModal/EditModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleFindContact } from 'redux/contacts/filterContactsSlice';
+import { deleteContact } from 'redux/contacts/opirations';
 import { toast } from 'react-toastify';
 
-
-
-import { ContactList, Notification, } from "./ContactList.styled"
-import { useContext } from "react";
+import { ContactList, Notification } from './ContactList.styled';
+import { useContext } from 'react';
 import createContext from '../../context/context';
-import { ItemContact } from "./ItemContact";
+import { ItemContact } from './ItemContact';
 //(favContacts ||  [])
 
-export const Contact = ({ addFavorite, removeFav}) =>{
-     const { 
-        favContacts, 
-        setContactId, 
-        setIsOpentModal, 
-        isOpentModal
-    } = useContext(createContext);
+export const Contact = ({ addFavorite, removeFav }) => {
+  const { favContacts, setContactId, setIsOpentModal, isOpentModal } =
+    useContext(createContext);
 
-    const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts.items);
-    const query = useSelector(state => state.filter.filter);
-    
-    const  getVisibleContact = () => {
-        const normalizeFilter = query.toLocaleLowerCase()
-      
-        return contacts.filter(({name})=>
-            name.toLocaleLowerCase().includes(normalizeFilter))
-    };
-      
-    const visibleContact = getVisibleContact();
-    
-    const handleDaleteContact = id =>{
-        dispatch(deleteContact(id))
-        dispatch(handleFindContact(''));
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
+  const query = useSelector(state => state.filter.filter);
 
-        const checkFav = favContacts.some(contact => contact.id === id);
+  const getVisibleContact = () => {
+    const normalizeFilter = query.toLocaleLowerCase();
 
-        if (checkFav === true) {
-            removeFav(id)
-        }
-    };
+    return contacts.filter(({ name }) =>
+      name.toLocaleLowerCase().includes(normalizeFilter)
+    );
+  };
 
-    const handleEditContact = id => {
-        setContactId(id)
-        setIsOpentModal(true);
-    };
+  const visibleContact = getVisibleContact();
 
+  const handleDaleteContact = id => {
+    dispatch(deleteContact(id));
+    dispatch(handleFindContact(''));
 
-    const handleAddFavorite = id => {
-        const favContact = contacts.find(contact => contact.id  === id);
-        const checkFavContact =  favContacts.some(contact =>contact.id === favContact.id);
-       
+    const checkFav = favContacts.some(contact => contact.id === id);
 
-        if (checkFavContact === true) {
-            toast.error('this contact is in your favorites')
-            return  
-        };
-        addFavorite(favContact)
-       
-        
-    };
+    if (checkFav === true) {
+      removeFav(id);
+    }
+  };
 
-    if  (contacts.length === 0) {
-        return <Notification>You have no contacts</Notification>;
-    };
+  const handleEditContact = id => {
+    setContactId(id);
+    setIsOpentModal(true);
+  };
 
-    if (visibleContact.length === 0) {
-        return <Notification>contact not found</Notification>;
-    };
+  const handleAddFavorite = id => {
+    const favContact = contacts.find(contact => contact.id === id);
+    const checkFavContact = favContacts.some(
+      contact => contact.id === favContact.id
+    );
 
-    return(
-        <ContactList> 
-            { visibleContact.map(contact => <ItemContact key={contact.id} {...contact} 
-                                                    handleDaleteContact={handleDaleteContact} 
-                                                    handleAddFavorite={handleAddFavorite} 
-                                                    handleEditContact={handleEditContact}
-                                                    favContacts={favContacts}
-                                                    removeFav={removeFav}/>)}
-            {isOpentModal && <EditModal/>}
-        </ContactList>
-    )
-    
+    if (checkFavContact === true) {
+      toast.error('this contact is in your favorites');
+      return;
+    }
+    addFavorite(favContact);
+  };
+
+  if (contacts.length === 0) {
+    return <Notification>You have no contacts</Notification>;
+  }
+
+  if (visibleContact.length === 0) {
+    return <Notification>contact not found</Notification>;
+  }
+
+  return (
+    <ContactList>
+      {visibleContact.map(contact => (
+        <ItemContact
+          key={contact.id}
+          {...contact}
+          handleDaleteContact={handleDaleteContact}
+          handleAddFavorite={handleAddFavorite}
+          handleEditContact={handleEditContact}
+          favContacts={favContacts}
+          removeFav={removeFav}
+        />
+      ))}
+      {isOpentModal && <EditModal />}
+    </ContactList>
+  );
 };
-
