@@ -28,9 +28,6 @@ export const App = () =>{
   const KEY = user.email;
 
   const dispatch =  useDispatch();
-  // const [favContacts, setFavContacts] = useState([]);
-  // const [isOpentModal, setIsOpentModal] = useState(false);
-  // const [contactId, setContactId] = useState('');
   
 
   const addFavorite = fav => {

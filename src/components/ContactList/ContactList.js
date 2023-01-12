@@ -5,15 +5,13 @@ import { handleFindContact } from "redux/contacts/filterContactsSlice";
 import { deleteContact } from "redux/contacts/opirations";
 import { toast } from 'react-toastify';
 
-import { AiFillEdit } from 'react-icons/ai'
-import { AiTwotoneDelete } from 'react-icons/ai'
-import { MdFavoriteBorder } from 'react-icons/md';
-import { MdFavorite } from 'react-icons/md'
 
-import { ContactList, ItemsContact,DeleteBtn, Notification, EditBtn, FavBtn } from "./ContactList.styled"
+
+import { ContactList, Notification, } from "./ContactList.styled"
 import { useIsFave } from "hooks/useIsFave";
 import { useContext } from "react";
 import createContext from '../../context/context'
+import { ItemContact } from "./ItemContact";
 //(favContacts ||  [])
 
 export const Contact = ({ addFavorite, removeFav}) =>{
@@ -23,16 +21,11 @@ export const Contact = ({ addFavorite, removeFav}) =>{
         setContactId, 
         setIsOpentModal, 
         isOpentModal
-    } = useContext(createContext)
+    } = useContext(createContext);
 
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
     const query = useSelector(state => state.filter.filter);
-
-    const isFav = useIsFave(contactId, favContacts);
-    console.log('isFav', isFav);
-    
-    
     
     const  getVisibleContact = () => {
         const normalizeFilter = query.toLocaleLowerCase()
@@ -78,27 +71,21 @@ export const Contact = ({ addFavorite, removeFav}) =>{
         
     };
 
-    
+    if  (contacts.length === 0) {
+        return <Notification>You have no contacts</Notification>;
+    }
 
-    
+    if (visibleContact.length === 0) {
+        return <Notification>contact not found</Notification>;
+    }
+
     return(
-        <ContactList>
-          
-            { contacts.length === 0
-                ? <Notification>You have no contacts</Notification>
-                : visibleContact.length === 0
-                    ? <Notification>contact not found</Notification>
-                    : visibleContact.map(({id, name, number}) =>(
-                        <ItemsContact key={id}>
-                            {name}: {number}
-                            <div style={{marginLeft: '15px'}}>
-                                <EditBtn type="button" onClick={()=>handleEditContact(id)}><AiFillEdit/></EditBtn> 
-                                <DeleteBtn type="button" onClick={()=>handleDaleteContact(id)}><AiTwotoneDelete/></DeleteBtn>
-                                <FavBtn type="button"onClick={()=>handleAddFavorite(id)}>{isFav ? <MdFavorite/> : <MdFavoriteBorder/>}</FavBtn>
-                            </div>
-                        </ItemsContact>
-                    ))
-            }
+        <ContactList> 
+            { visibleContact.map((c) => <ItemContact key={c.id} {...c} 
+                                                    handleDaleteContact={handleDaleteContact} 
+                                                    handleAddFavorite={handleAddFavorite} 
+                                                    handleEditContact={handleEditContact}
+                                                    favContacts={favContacts}/>)}
             {isOpentModal && <EditModal/>}
         </ContactList>
     )

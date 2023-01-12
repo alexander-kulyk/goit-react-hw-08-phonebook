@@ -21,7 +21,7 @@ export const FavoriteContacts = ({removeFav}) => {
     favContacts, 
     isOpentModal,
     setIsOpentModal,
-    setContactId} = useContext(createContext)
+    setContactId} = useContext(createContext);
     
   const handleRemoveFav = id => {
     removeFav(id)
