@@ -65,7 +65,7 @@ export const Contact = ({ addFavorite, removeFav}) =>{
             return  
         };
         addFavorite(favContact)
-        toast('added contact to favorite');
+       
         
     };
 
@@ -79,16 +79,15 @@ export const Contact = ({ addFavorite, removeFav}) =>{
 
     return(
         <ContactList> 
-            { visibleContact.map((c) => <ItemContact key={c.id} {...c} 
+            { visibleContact.map(contact => <ItemContact key={contact.id} {...contact} 
                                                     handleDaleteContact={handleDaleteContact} 
                                                     handleAddFavorite={handleAddFavorite} 
                                                     handleEditContact={handleEditContact}
-                                                    favContacts={favContacts}/>)}
+                                                    favContacts={favContacts}
+                                                    removeFav={removeFav}/>)}
             {isOpentModal && <EditModal/>}
         </ContactList>
     )
     
 }
 
-//onClick={()=>handleEditContact(id)}
-//isFav ? <MdFavorite/> : <MdFavoriteBorder/>
