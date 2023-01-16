@@ -1,4 +1,4 @@
-import { Contact } from 'components/ContactList/ContactList';
+import { ContactList } from 'components/ContactList/ContactList';
 import Container from 'components/Container/Conteiner.styled';
 import { ErrorMessage } from 'components/Error/ErrorMessage';
 import { Filter } from 'components/Filter/Filter';
@@ -48,7 +48,7 @@ export const PhoneBook = ({ addFavorite, removeFav }) => {
           {isLoading ? (
             <SkeletLoader />
           ) : (
-            <Contact addFavorite={addFavorite} removeFav={removeFav} />
+            <ContactList addFavorite={addFavorite} removeFav={removeFav} />
           )}
         </Container>
       </Container>

@@ -1,7 +1,8 @@
 import { useIsFave } from 'hooks/useIsFave';
 import { AiFillEdit, AiTwotoneDelete } from 'react-icons/ai';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
-import { EditBtn, ItemsContact, DeleteBtn, FavBtn } from './ContactList.styled';
+
+import css from './ContactList.module.css';
 
 export const ItemContact = ({
   id,
@@ -15,25 +16,41 @@ export const ItemContact = ({
 }) => {
   const isFav = useIsFave(id, favContacts);
   return (
-    <ItemsContact key={id}>
+    <li className={css.item} key={id}>
       {name}: {number}
       <div style={{ marginLeft: '15px' }}>
-        <EditBtn type="button" onClick={() => handleEditContact(id)}>
+        <button
+          className={css.editBtn}
+          type="button"
+          onClick={() => handleEditContact(id)}
+        >
           <AiFillEdit />
-        </EditBtn>
-        <DeleteBtn type="button" onClick={() => handleDaleteContact(id)}>
+        </button>
+        <button
+          className={css.delBtn}
+          type="button"
+          onClick={() => handleDaleteContact(id)}
+        >
           <AiTwotoneDelete />
-        </DeleteBtn>
+        </button>
         {isFav ? (
-          <FavBtn type="button" onClick={() => removeFav(id)}>
+          <button
+            className={css.buttonFav}
+            type="button"
+            onClick={() => removeFav(id)}
+          >
             <MdFavorite />
-          </FavBtn>
+          </button>
         ) : (
-          <FavBtn type="button" onClick={() => handleAddFavorite(id)}>
+          <button
+            className={css.buttonFav}
+            type="button"
+            onClick={() => handleAddFavorite(id)}
+          >
             <MdFavoriteBorder />
-          </FavBtn>
+          </button>
         )}
       </div>
-    </ItemsContact>
+    </li>
   );
 };

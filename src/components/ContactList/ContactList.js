@@ -4,13 +4,14 @@ import { handleFindContact } from 'redux/contacts/filterContactsSlice';
 import { deleteContact } from 'redux/contacts/opirations';
 import { toast } from 'react-toastify';
 
-import { ContactList, Notification } from './ContactList.styled';
+//import { Notification } from './ContactList.styled';
 import { useContext } from 'react';
 import createContext from '../../context/context';
 import { ItemContact } from './ItemContact';
+import css from './ContactList.module.css';
 //(favContacts ||  [])
 
-export const Contact = ({ addFavorite, removeFav }) => {
+export const ContactList = ({ addFavorite, removeFav }) => {
   const { favContacts, setContactId, setIsOpentModal, isOpentModal } =
     useContext(createContext);
 
@@ -58,15 +59,15 @@ export const Contact = ({ addFavorite, removeFav }) => {
   };
 
   if (contacts.length === 0) {
-    return <Notification>You have no contacts</Notification>;
+    return <p className={css.notifi}>You have no contacts</p>;
   }
 
   if (visibleContact.length === 0) {
-    return <Notification>contact not found</Notification>;
+    return <p className={css.notifi}>contact not found</p>;
   }
 
   return (
-    <ContactList>
+    <ul className={css.list}>
       {visibleContact.map(contact => (
         <ItemContact
           key={contact.id}
@@ -79,6 +80,6 @@ export const Contact = ({ addFavorite, removeFav }) => {
         />
       ))}
       {isOpentModal && <EditModal />}
-    </ContactList>
+    </ul>
   );
 };
